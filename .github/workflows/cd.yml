@@ -1,17 +1,14 @@
 name: Deploying the nodejs application to ec2 instance as runner in aws ap-south-1
 on:
-  push:
-    branches:
-      - ci-branch
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Build the CI job for nodejs application"]
+    types:
+      - completed
 
 jobs:
   deploy: 
     name: Deploying the nodejs application to ec2 instance as runner in aws ap-south-1
     runs-on: self-hosted
-    needs: build
     #matrix:
     #  os: [ubuntu-latest, amazonlinux2]
     steps:
